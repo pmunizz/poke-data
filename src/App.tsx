@@ -1,71 +1,73 @@
 import { useEffect, useState } from "react";
-
 import { buscarPokemon } from "./services/pokiApi";
-
 import {
   contarPokemonPorTipo,
   compararAtributos,
   type PokemonTypeCount,
   type PokemonStatsComparison,
 } from "./utils/pokemonTransform";
-
 import PokemonTypeChart from "./components/PokemonTypeChart";
-
+import PokemonStatsChart from "./components/PokemonStatsChart";
 import type { Pokemon } from "./types/pokemon";
 
 function App() {
-  // Guarda a lista de Pokémon recebidos da API
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-
-  // Guarda os dados já transformados para o gráfico de tipos
   const [dadosPorTipo, setDadosPorTipo] = useState<PokemonTypeCount[]>([]);
-
-  // Guarda os dados transformados para comparar os atributos
   const [dadosComparacao, setDadosComparacao] =
     useState<PokemonStatsComparison[]>([]);
 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     async function carregarPokemons() {
-      const nomes = ["pikachu", "charizard", "bulbasaur"];
+      try {
+        setLoading(true);
+        setError(null);
 
-      // Busca os três Pokémon
-      const resultados = await Promise.all(
-        nomes.map((nome) => buscarPokemon(nome))
-      );
+        const nomes = ["pikachu", "charizard", "bulbasaur"];
 
-      // Guarda os dados brutos dos Pokémon
-      setPokemons(resultados);
+        const resultados = await Promise.all(
+          nomes.map((nome) => buscarPokemon(nome))
+        );
 
-      // Transforma os dados para descobrir
-      // quantos Pokémon existem de cada tipo
-      const dadosTransformados = contarPokemonPorTipo(resultados);
+        setPokemons(resultados);
 
-      // Guarda os dados transformados no estado
-      setDadosPorTipo(dadosTransformados);
+        const dadosTransformados = contarPokemonPorTipo(resultados);
+        setDadosPorTipo(dadosTransformados);
 
-      // Transforma os stats dos Pokémon
-      // em uma estrutura própria para comparação
-      const dadosDosAtributos = compararAtributos(resultados);
-
-      // Guarda os dados transformados no estado
-      setDadosComparacao(dadosDosAtributos);
-
-      console.log("Pokémons:", resultados);
-      console.log("Pokémons por tipo:", dadosTransformados);
-      console.log("Comparação de atributos:", dadosDosAtributos);
+        const dadosDosAtributos = compararAtributos(resultados);
+        setDadosComparacao(dadosDosAtributos);
+      } catch (error) {
+        setError("Não foi possível carregar os Pokémon.");
+      } finally {
+        setLoading(false);
+      }
     }
 
     carregarPokemons();
   }, []);
 
+  if (loading) {
+    return <h1>Carregando...</h1>;
+  }
+
+  if (error) {
+    return <h1>{error}</h1>;
+  }
+
+  if (pokemons.length === 0) {
+    return <h1>Nenhum Pokémon encontrado.</h1>;
+  }
+
   return (
     <div>
       <h1>Pokémon Dashboard</h1>
 
-      {/* Gráfico com os dados tratados por tipo */}
       <PokemonTypeChart data={dadosPorTipo} />
 
-      {/* Lista dos Pokémon */}
+      <PokemonStatsChart data={dadosComparacao} />
+
       {pokemons.map((pokemon) => (
         <div key={pokemon.id}>
           <h2>{pokemon.name}</h2>
