@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { buscarPokemon } from "./services/pokiApi";
+
 import {
   contarPokemonPorTipo,
   compararAtributos,
   type PokemonTypeCount,
   type PokemonStatsComparison,
 } from "./utils/pokemonTransform";
+
 import PokemonTypeChart from "./components/PokemonTypeChart";
 import PokemonStatsChart from "./components/PokemonStatsChart";
+
 import type { Pokemon } from "./types/pokemon";
 
 function App() {
@@ -25,7 +28,18 @@ function App() {
         setLoading(true);
         setError(null);
 
-        const nomes = ["pikachu", "charizard", "bulbasaur"];
+        const nomes = [
+  "pikachu",
+  "charizard",
+  "bulbasaur",
+  "squirtle",
+  "gengar",
+  "eevee",
+  "snorlax",
+  "lucario",
+  "greninja",
+  "mewtwo",
+];
 
         const resultados = await Promise.all(
           nomes.map((nome) => buscarPokemon(nome))

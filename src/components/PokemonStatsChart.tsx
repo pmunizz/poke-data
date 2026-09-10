@@ -20,20 +20,16 @@ function PokemonStatsChart({ data }: PokemonStatsChartProps) {
     <ResponsiveContainer width="100%" height={400}>
       <BarChart data={data}>
         <CartesianGrid strokeDasharray="3 3" />
-
         <XAxis dataKey="atributo" />
-
         <YAxis />
-
         <Tooltip />
-
         <Legend />
 
-        <Bar dataKey="pikachu" />
-
-        <Bar dataKey="charizard" />
-
-        <Bar dataKey="bulbasaur" />
+        {Object.keys(data[0] || {})
+          .filter((key) => key !== "atributo")
+          .map((pokemonName) => (
+            <Bar key={pokemonName} dataKey={pokemonName} />
+          ))}
       </BarChart>
     </ResponsiveContainer>
   );

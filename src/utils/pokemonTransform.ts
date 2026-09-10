@@ -26,9 +26,7 @@ export function contarPokemonPorTipo(
 
 export interface PokemonStatsComparison {
   atributo: string;
-  pikachu: number;
-  charizard: number;
-  bulbasaur: number;
+  [pokemonName: string]: string | number;
 }
 
 export function compararAtributos(
@@ -43,22 +41,19 @@ export function compararAtributos(
     "speed",
   ];
 
-  return atributos.map((atributo) => ({
-    atributo,
+  return atributos.map((atributo) => {
+    const resultado: PokemonStatsComparison = {
+      atributo,
+    };
 
-    pikachu:
-      pokemons
-        .find((pokemon) => pokemon.name === "pikachu")
-        ?.stats.find((stat) => stat.stat.name === atributo)?.base_stat ?? 0,
+    pokemons.forEach((pokemon) => {
+      const stat = pokemon.stats.find(
+        (stat) => stat.stat.name === atributo
+      );
 
-    charizard:
-      pokemons
-        .find((pokemon) => pokemon.name === "charizard")
-        ?.stats.find((stat) => stat.stat.name === atributo)?.base_stat ?? 0,
+      resultado[pokemon.name] = stat?.base_stat ?? 0;
+    });
 
-    bulbasaur:
-      pokemons
-        .find((pokemon) => pokemon.name === "bulbasaur")
-        ?.stats.find((stat) => stat.stat.name === atributo)?.base_stat ?? 0,
-  }));
+    return resultado;
+  });
 }
