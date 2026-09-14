@@ -267,13 +267,28 @@ body {
   }
 
   .indicadores {
-    flex-direction: column;
-    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 5px 0 15px 0;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+
+  .indicadores::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .indicadores::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+    border-radius: 10px;
   }
 
   .indicador {
-    width: 90%;
-    max-width: 300px;
+    min-width: 220px;
+    width: 220px;
+    scroll-snap-align: start;
   }
 
   .grafico {
@@ -321,9 +336,14 @@ body {
     font-size: 24px;
   }
 
+  .indicadores {
+    gap: 12px;
+  }
+
   .indicador {
-    width: 100%;
-    box-sizing: border-box;
+    min-width: 200px;
+    width: 200px;
+    padding: 15px;
   }
 
   .pokemon {
