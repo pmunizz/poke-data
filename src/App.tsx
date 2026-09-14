@@ -5,11 +5,9 @@ import "./App.css";
 import { buscarPokemon } from "./services/pokiApi";
 
 import {
-  contarPokemonPorTipo,
   compararAtaqueDefesa,
 } from "./utils/TransformarPokemon";
 
-import GraficoTipos from "./components/GraficoTipos";
 import GraficoAtaqueDefesa from "./components/GraficoAtaqueDefesa";
 import GraficoAtributos from "./components/GraficoAtributos";
 
@@ -92,8 +90,6 @@ function App() {
     );
   }
 
-  const dadosTipos = contarPokemonPorTipo(pokemons);
-
   const dadosComparacao = compararAtaqueDefesa(pokemons);
 
   const maiorAtaque = dadosComparacao[0];
@@ -139,8 +135,6 @@ function App() {
           <span>{maiorDefesa.defesa}</span>
         </div>
       </section>
-
-      <GraficoTipos dados={dadosTipos} />
 
       <GraficoAtaqueDefesa dados={dadosComparacao} />
 
