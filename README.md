@@ -1,32 +1,60 @@
-# React + TypeScript + Vite
+# Poke Data
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+O **Poke Data** é uma aplicação web desenvolvida com **React + TypeScript** que consome dados da **PokéAPI** e apresenta essas informações em formato de dashboard.
 
-Currently, two official plugins are available:
+O objetivo do projeto é praticar consumo de APIs REST, tratamento de dados, componentização, tipagem com TypeScript e visualização de dados com gráficos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tecnologias utilizadas
 
-## React Compiler
+- React
+- TypeScript
+- Vite
+- Axios
+- Recharts
+- PokéAPI
+- CSS
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Funcionalidades
 
-## Expanding the Oxlint configuration
+- Busca de dados de Pokémon através da PokéAPI
+- Exibição de um gráfico com a quantidade de Pokémon por tipo
+- Exibição de um gráfico comparando a experiência base dos Pokémon
+- Lista com imagem, nome, ID, tipo e experiência dos Pokémon analisados
+- Estado de carregamento
+- Mensagem de erro em caso de falha na API
+- Estado vazio caso nenhum dado seja retornado
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Fonte de dados
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+Os dados utilizados no projeto são obtidos através da PokéAPI.
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+A aplicação utiliza informações como:
+
+- nome
+- ID
+- tipo
+- experiência base
+- imagem
+
+## Arquitetura do projeto
+
+A aplicação foi organizada separando responsabilidades:
+
+```text
+src/
+│
+├── App.tsx
+├── App.css
+│
+├── components/
+│   ├── GraficoTipos.tsx
+│   └── GraficoExperiencia.tsx
+│
+├── services/
+│   └── pokiApi.ts
+│
+├── types/
+│   └── pokemon.ts
+│
+└── utils/
+    └── TransformarPokemon.ts
