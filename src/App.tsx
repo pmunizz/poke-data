@@ -11,6 +11,7 @@ import {
 
 import GraficoTipos from "./components/GraficoTipos";
 import GraficoAtaqueDefesa from "./components/GraficoAtaqueDefesa";
+import GraficoAtributos from "./components/GraficoAtributos";
 
 import type { Pokemon } from "./types/pokemon";
 
@@ -20,6 +21,9 @@ function App() {
   const [carregando, setCarregando] = useState(true);
 
   const [erro, setErro] = useState<string | null>(null);
+
+  const [pokemonSelecionado, setPokemonSelecionado] =
+    useState("pikachu");
 
   useEffect(() => {
     async function carregarPokemons() {
@@ -42,12 +46,14 @@ function App() {
         ];
 
         const resultados = await Promise.all(
-          nomes.map((nome) => buscarPokemon(nome)),
+          nomes.map((nome) => buscarPokemon(nome))
         );
 
         setPokemons(resultados);
       } catch (error) {
-        setErro("Não foi possível carregar os Pokémon. Tente novamente.");
+        setErro(
+          "Não foi possível carregar os Pokémon. Tente novamente."
+        );
       } finally {
         setCarregando(false);
       }
@@ -93,15 +99,21 @@ function App() {
   const maiorAtaque = dadosComparacao[0];
 
   const maiorDefesa = [...dadosComparacao].sort(
-    (a, b) => b.defesa - a.defesa,
+    (a, b) => b.defesa - a.defesa
   )[0];
+
+  const pokemonAtual = pokemons.find(
+    (pokemon) => pokemon.name === pokemonSelecionado
+  );
 
   return (
     <div className="dashboard">
       <header className="cabecalho">
         <h1>Poke Data</h1>
 
-        <p>Dashboard para visualização de dados da PokéAPI</p>
+        <p>
+          Dashboard para visualização de dados da PokéAPI
+        </p>
       </header>
 
       <section className="indicadores">
@@ -132,13 +144,51 @@ function App() {
 
       <GraficoAtaqueDefesa dados={dadosComparacao} />
 
+      <section className="grafico">
+        <h2>Atributos por Pokémon</h2>
+
+        <p className="descricao-grafico">
+          Escolha um Pokémon para visualizar seus atributos.
+        </p>
+
+        <div className="seletor">
+          <label htmlFor="pokemon">
+            Pokémon:
+          </label>
+
+          <select
+            id="pokemon"
+            value={pokemonSelecionado}
+            onChange={(event) =>
+              setPokemonSelecionado(event.target.value)
+            }
+          >
+            {pokemons.map((pokemon) => (
+              <option
+                key={pokemon.id}
+                value={pokemon.name}
+              >
+                {pokemon.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {pokemonAtual && (
+          <GraficoAtributos pokemon={pokemonAtual} />
+        )}
+      </section>
+
       <section className="secao-pokemon">
         <h2>Pokémon analisados</h2>
 
         <div className="carrossel-pokemon">
           {pokemons.map((pokemon) => (
             <div className="pokemon" key={pokemon.id}>
-              <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+              <img
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}
+              />
 
               <h3>{pokemon.name}</h3>
 

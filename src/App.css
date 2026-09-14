@@ -83,6 +83,28 @@ body {
   margin-bottom: 20px;
 }
 
+/* Seletor */
+
+.seletor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.seletor label {
+  font-weight: bold;
+}
+
+.seletor select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  text-transform: capitalize;
+}
+
 /* Pokémon */
 
 .secao-pokemon {
@@ -93,18 +115,12 @@ body {
   text-align: center;
 }
 
-/* Carrossel dos Pokémon */
-
 .carrossel-pokemon {
   display: flex;
   gap: 20px;
-
   overflow-x: auto;
-
   padding: 15px 5px 25px 5px;
-
   scroll-snap-type: x mandatory;
-
   scroll-behavior: smooth;
 }
 
@@ -124,17 +140,11 @@ body {
 
 .pokemon {
   background-color: white;
-
   min-width: 160px;
-
   padding: 15px;
-
   text-align: center;
-
   border-radius: 8px;
-
   transition: 0.2s;
-
   scroll-snap-align: start;
 }
 
@@ -228,29 +238,23 @@ body {
   background-color: #6752bc;
 }
 
-/* Estados da aplicação */
+/* Estados */
 
 .estado {
   height: 100vh;
-
   display: flex;
   flex-direction: column;
-
   justify-content: center;
   align-items: center;
-
   font-family: Arial, sans-serif;
 }
 
 .spinner {
   width: 40px;
   height: 40px;
-
   border: 5px solid #ddd;
   border-top: 5px solid #4f75ff;
-
   border-radius: 50%;
-
   animation: girar 1s linear infinite;
 }
 
