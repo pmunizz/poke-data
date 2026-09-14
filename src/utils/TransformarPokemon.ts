@@ -5,9 +5,10 @@ export interface ContagemTipo {
   quantidade: number;
 }
 
-export interface ExperienciaPokemon {
+export interface ComparacaoPokemon {
   nome: string;
-  experiencia: number;
+  ataque: number;
+  defesa: number;
 }
 
 export function contarPokemonPorTipo(
@@ -23,21 +24,36 @@ export function contarPokemonPorTipo(
     });
   });
 
-  return Object.entries(contagem).map(([tipo, quantidade]) => ({
-    tipo,
-    quantidade,
-  }));
-}
-
-export function organizarExperiencia(
-  pokemons: Pokemon[]
-): ExperienciaPokemon[] {
-  const dados = pokemons.map((pokemon) => ({
-    nome: pokemon.name,
-    experiencia: pokemon.base_experience,
-  }));
+  const dados = Object.entries(contagem).map(
+    ([tipo, quantidade]) => ({
+      tipo,
+      quantidade,
+    })
+  );
 
   return dados.sort(
-    (a, b) => a.experiencia - b.experiencia
+    (a, b) => b.quantidade - a.quantidade
   );
+}
+
+export function compararAtaqueDefesa(
+  pokemons: Pokemon[]
+): ComparacaoPokemon[] {
+  const dados = pokemons.map((pokemon) => {
+    const ataque = pokemon.stats.find(
+      (item) => item.stat.name === "attack"
+    );
+
+    const defesa = pokemon.stats.find(
+      (item) => item.stat.name === "defense"
+    );
+
+    return {
+      nome: pokemon.name,
+      ataque: ataque?.base_stat ?? 0,
+      defesa: defesa?.base_stat ?? 0,
+    };
+  });
+
+  return dados.sort((a, b) => b.ataque - a.ataque);
 }

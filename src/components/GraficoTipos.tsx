@@ -19,13 +19,31 @@ function GraficoTipos({ dados }: GraficoTiposProps) {
     <div className="grafico">
       <h2>Quantidade de Pokémon por tipo</h2>
 
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={dados}>
+      <p className="descricao-grafico">
+        Distribuição dos tipos encontrados nos Pokémon analisados.
+      </p>
+
+      <ResponsiveContainer width="100%" height={420}>
+        <BarChart
+          data={dados}
+          layout="vertical"
+          margin={{
+            left: 30,
+            right: 30,
+          }}
+        >
           <CartesianGrid strokeDasharray="3 3" />
 
-          <XAxis dataKey="tipo" />
+          <XAxis
+            type="number"
+            allowDecimals={false}
+          />
 
-          <YAxis allowDecimals={false} />
+          <YAxis
+            dataKey="tipo"
+            type="category"
+            width={80}
+          />
 
           <Tooltip />
 
