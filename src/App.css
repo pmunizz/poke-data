@@ -27,8 +27,6 @@ body {
   color: #555;
 }
 
-/* Indicadores */
-
 .indicadores {
   display: flex;
   justify-content: center;
@@ -62,8 +60,6 @@ body {
   color: #666;
 }
 
-/* Gráficos */
-
 .grafico {
   background-color: white;
   padding: 20px;
@@ -82,8 +78,6 @@ body {
   margin-top: 0;
   margin-bottom: 20px;
 }
-
-/* Seletor */
 
 .seletor {
   display: flex;
@@ -104,8 +98,6 @@ body {
   background-color: white;
   text-transform: capitalize;
 }
-
-/* Pokémon */
 
 .secao-pokemon {
   margin-top: 40px;
@@ -166,8 +158,6 @@ body {
   margin: 7px 0;
   font-size: 14px;
 }
-
-/* Tipos */
 
 .tipos {
   display: flex;
@@ -238,8 +228,6 @@ body {
   background-color: #6752bc;
 }
 
-/* Estados */
-
 .estado {
   height: 100vh;
   display: flex;
@@ -261,5 +249,90 @@ body {
 @keyframes girar {
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    width: 95%;
+    padding: 20px 0;
+  }
+
+  .cabecalho h1 {
+    font-size: 28px;
+  }
+
+  .cabecalho p {
+    font-size: 14px;
+  }
+
+  .indicadores {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .indicador {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .grafico {
+    padding: 15px;
+  }
+
+  .grafico h2 {
+    font-size: 20px;
+  }
+
+  .descricao-grafico {
+    font-size: 14px;
+  }
+
+  .seletor {
+    flex-direction: column;
+  }
+
+  .seletor select {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .pokemon {
+    min-width: 140px;
+  }
+
+  .secao-pokemon h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard {
+    width: 100%;
+    padding: 15px 10px;
+    box-sizing: border-box;
+  }
+
+  .grafico {
+    padding: 10px;
+  }
+
+  .cabecalho h1 {
+    font-size: 24px;
+  }
+
+  .indicador {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .pokemon {
+    min-width: 130px;
+    padding: 10px;
+  }
+
+  .pokemon img {
+    width: 90px;
+    height: 90px;
   }
 }

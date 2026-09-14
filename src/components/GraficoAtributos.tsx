@@ -7,7 +7,6 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
 import type { Pokemon } from "../types/pokemon";
 
 interface GraficoAtributosProps {
@@ -26,13 +25,9 @@ function GraficoAtributos({
     <ResponsiveContainer width="100%" height={320}>
       <LineChart data={dados}>
         <CartesianGrid strokeDasharray="3 3" />
-
         <XAxis dataKey="atributo" />
-
         <YAxis />
-
         <Tooltip />
-
         <Line
           type="monotone"
           dataKey="valor"

@@ -7,7 +7,6 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
 import type { ContagemTipo } from "../utils/TransformarPokemon";
 
 interface GraficoTiposProps {
@@ -18,7 +17,6 @@ function GraficoTipos({ dados }: GraficoTiposProps) {
   return (
     <div className="grafico">
       <h2>Quantidade de Pokémon por tipo</h2>
-
       <p className="descricao-grafico">
         Distribuição dos tipos encontrados nos Pokémon analisados.
       </p>
@@ -33,20 +31,16 @@ function GraficoTipos({ dados }: GraficoTiposProps) {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-
           <XAxis
             type="number"
             allowDecimals={false}
           />
-
           <YAxis
             dataKey="tipo"
             type="category"
             width={80}
           />
-
           <Tooltip />
-
           <Bar
             dataKey="quantidade"
             name="Quantidade"
