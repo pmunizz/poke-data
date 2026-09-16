@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import type { Pokemon } from "../types/pokemon";
 
 const api = axios.create({
@@ -7,7 +6,7 @@ const api = axios.create({
 });
 
 export async function buscarPokemon(nome: string): Promise<Pokemon> {
-  const resposta = await api.get<Pokemon>(`/pokemon/${nome}`);
-
-  return resposta.data;
+  const resposta = await api.get(`/pokemon/${nome}`);
+  const pokemon: Pokemon = resposta.data;
+  return pokemon;
 }

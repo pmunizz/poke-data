@@ -13,13 +13,17 @@ interface GraficoAtributosProps {
   pokemon: Pokemon;
 }
 
-function GraficoAtributos({
-  pokemon,
-}: GraficoAtributosProps) {
-  const dados = pokemon.stats.map((item) => ({
-    atributo: item.stat.name,
-    valor: item.base_stat,
-  }));
+function GraficoAtributos({ pokemon }: GraficoAtributosProps) {
+  const dados = [];
+
+  for (let i = 0; i < pokemon.stats.length; i++) {
+    const item = pokemon.stats[i];
+
+    dados.push({
+      atributo: item.stat.name,
+      valor: item.base_stat,
+    });
+  }
 
   return (
     <ResponsiveContainer width="100%" height={320}>

@@ -11,7 +11,7 @@ import {
 import type { ComparacaoPokemon } from "../utils/TransformarPokemon";
 
 interface GraficoAtaqueDefesaProps {
-  dados: ComparacaoPokemon[];
+  dados: ComparacaoPokemon[]; // Props tipadas com TypeScript, que recebe um array de objetos do tipo ComparacaoPokemon, que contém informações sobre o nome, ataque e defesa de cada Pokémon
 }
 
 function GraficoAtaqueDefesa({
@@ -31,7 +31,7 @@ function GraficoAtaqueDefesa({
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar
+          <Bar // Cada Bar corresponde a uma propriedade dos objetos do array de dados, que são os atributos ataque e defesa de cada Pokémon
             dataKey="ataque"
             name="Ataque"
             fill="#e85d5d"
