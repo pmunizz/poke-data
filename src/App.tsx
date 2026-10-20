@@ -5,12 +5,33 @@ import { compararAtaqueDefesa } from "./utils/TransformarPokemon";
 import GraficoAtaqueDefesa from "./components/GraficoAtaqueDefesa";
 import GraficoAtributos from "./components/GraficoAtributos";
 import type { Pokemon } from "./types/pokemon";
+import { Watermark } from "watermark-js-plus";
 
 function App() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState<string | null>(null);
   const [pokemonSelecionado, setPokemonSelecionado] = useState("pikachu");
+
+  // <-- 2. Adicione o useEffect para criar a marca d'água
+  useEffect(() => {
+    const watermark = new Watermark({
+      content: "Pedro Otávio Muniz Lobato", // Texto da marca d'água
+      fontColor: "#999999",
+      fontSize: '15px',
+      globalAlpha: 0.04, // Transparência
+      rotate: 0,
+      width: 300,
+      height: 200,
+    });
+
+    watermark.create();
+
+    // Cleanup: Remove a marca d'água se o componente for desmontado
+    return () => {
+      watermark.destroy();
+    };
+  }, []);
 
   useEffect(() => {
     async function carregarPokemons() {
