@@ -20,7 +20,7 @@ function App() {
       content: "Pedro Otávio Muniz Lobato",
       fontColor: "#999999",
       fontSize: isMobile ? "11px" : "15px",
-      globalAlpha: 0.15,
+      globalAlpha: 0.08,
       rotate: 0,
       width: isMobile ? 200 : 300,
       height: isMobile ? 130 : 200,
