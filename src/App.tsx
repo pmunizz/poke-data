@@ -13,24 +13,22 @@ function App() {
   const [erro, setErro] = useState<string | null>(null);
   const [pokemonSelecionado, setPokemonSelecionado] = useState("pikachu");
 
-  // <-- 2. Adicione o useEffect para criar a marca d'água
   useEffect(() => {
+    const isMobile = window.innerWidth < 640;
+
     const watermark = new Watermark({
-      content: "Pedro Otávio Muniz Lobato", // Texto da marca d'água
+      content: "Pedro Otávio Muniz Lobato",
       fontColor: "#999999",
-      fontSize: '15px',
-      globalAlpha: 0.04, // Transparência
+      fontSize: isMobile ? "11px" : "15px",
+      globalAlpha: 0.15,
       rotate: 0,
-      width: 300,
-      height: 200,
+      width: isMobile ? 200 : 300,
+      height: isMobile ? 130 : 200,
     });
 
     watermark.create();
 
-    // Cleanup: Remove a marca d'água se o componente for desmontado
-    return () => {
-      watermark.destroy();
-    };
+    return () => watermark.destroy();
   }, []);
 
   useEffect(() => {
